@@ -1,0 +1,21 @@
+.box {
+    width: auto;
+    height: auto;
+    padding: 1px;
+    margin: 1px;
+}
+
+.imagem {
+    width: 250px;
+    height: auto;
+    margin-top: 100px;
+    margin-left: 430px;
+}
+
+.texto {
+    top: 10px;
+    width: auto;
+    height: auto;
+    text-align: center;
+    position: relative;
+}

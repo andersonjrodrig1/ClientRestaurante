@@ -1,0 +1,105 @@
+<div class="container">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <a [routerLink]="['']" class="navbar-brand">Home</a>
+        <a [routerLink]="['/restaurantes']" class="navbar-brand">Restaurantes</a>
+        <a [routerLink]="['/pratos']" class="navbar-brand">Pratos</a>
+    </nav>
+    <div class="box">
+        <div [hidden]="hideRestaurante">
+            <div class="title">
+                <h5>RESTAURANTES</h5>
+            </div>
+            <div class="boxField">
+                <form #pesqForm="ngForm">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Filtros</legend>
+                        <div class="control-group">
+                            <div class="row">
+                                <div class="col-sm-10">                            
+                                    <label>Nome:</label>
+                                    <input name="nome" type="text" class="form-control" [(ngModel)] = nome />
+                                </div>
+                            </div>
+                            <br class="clearfix" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary" (click)="buscarRestaurantesPorNome(nome)">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                        &nbsp;Pesquisar
+                                    </button>
+                                    <button class="btn btn-success" (click)="novoCadastroRestaurante(cadForm)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        &nbsp;Cadastrar novo Restaurante
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="boxTable">
+                <table class="table table-striped table-houver">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Restaurantes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let restaurante of restaurantes">
+                            <td>
+                                <a  href="javascript:void(0)" class="glyphicon glyphicon-minus"
+                                    (click)="excluirRestaurante(restaurante)"  style="color:#f00; text-decoration:none;">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" class="glyphicon glyphicon-pencil" 
+                                    (click)="editarRestaurante(restaurante, cadForm)" style="text-decoration:none;">
+                                </a>
+                            </td>
+                            <td>{{restaurante.nmRestaurante}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div [hidden]="hideCadastro">
+            <div class="title">
+                <h5>CADASTRO DE RESTAURANTE</h5>
+            </div>
+            <div class="boxField">
+                <form #cadForm="ngForm">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Dados</legend>
+                        <div class="control-group">
+                            <div class="row">
+                                <div class="col-sm-9">                            
+                                    <label>Nome:</label>
+                                    <input name="nmRestaurante" type="text" class="form-control" [(ngModel)]=nmRestaurante />
+                                </div>
+                                <div class="col-sm-1" style="visibility:hidden;">                            
+                                    <label>id:</label>
+                                    <input name="id" type="text" class="form-control" [(ngModel)]=id />
+                                </div>
+                            </div>
+                            <br class="clearfix" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-danger" (click)="cancelarCadastro(pesqForm)">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        &nbsp;Cancelar
+                                    </button>
+                                    <button class="btn btn-success" [disabled]=!nmRestaurante (click)="cadastrarRestaurante(id, nmRestaurante)" >
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        &nbsp;Salvar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
